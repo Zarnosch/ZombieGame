@@ -99,7 +99,7 @@ public class King_Joffrey extends PlayerController{
 		if(ownPlayer.getNoiseRadius(movement) < nearestZombies[0].euclideanDistance(ownPosition)){
 			movement.div(5);
 		}
-		//test
+		//test2
 		return movement;
 	}
 }
