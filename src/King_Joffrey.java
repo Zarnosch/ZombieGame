@@ -20,7 +20,6 @@ public class King_Joffrey extends PlayerController{
 	// Think batman
 	@Override
 	public Vector think(AiMapInfo map, AiPlayerInfo ownPlayer) {
-		long time1 = System.nanoTime();
 		debugInfo.clearCircles();
 		//Steps alive
 		stepsAlive += 1;
@@ -75,9 +74,6 @@ public class King_Joffrey extends PlayerController{
 	
 
 		//Bottle-throw reaction to near Zombies
-		if(map.getPassedSteps() == 25){
-			throwBottle((nearestFlags[0].mult(1.5f)).add(ownPosition));
-		}
 		if(((stepsAlive * ownPlayer.getNumBottles() > 600) && 
 				(map.getZombiesInRadius(ownPosition, ownPlayer.getCurrentNoiseRadius()+2).length) > 0) || 
 				((map.getZombiesInRadius(ownPosition, ownPlayer.getCurrentNoiseRadius()+2).length) > 1) &&
@@ -87,9 +83,9 @@ public class King_Joffrey extends PlayerController{
 		if(died){
 			stepsAlive = 1;
 		}
-//		if(map.getPassedSteps() <= 7){
-//			movement = new Vector(0,1);
-//		}
+		if(stepsAlive <= 5){
+			movement = Vector.ZERO().sub(ownPosition);
+		}
 		//Debug an NanoTime Measurement
 		debugInfo.addDebugCircle(ownPosition, ownPlayer.getCurrentNoiseRadius());
 		debugInfo.getDebugCircles().add(new DebugCircle(nearestFlags[0], 5));
